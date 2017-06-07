@@ -1,0 +1,16 @@
+(lp0
+VPlayer Name
+p1
+aVTeam Name
+p2
+aVNationality
+p3
+aVBirth Year
+p4
+aVBatting Style
+p5
+aVBowling Style
+p6
+aVSigned Year
+p7
+a.

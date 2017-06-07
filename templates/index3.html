@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+.container {width: 460px; margin: 10 auto; overflow: hidden;}
+.spinwheel {width:100px; margin:0 auto; padding-top:190px;}
+.contentBar {width:10px; margin:0 auto; padding-top:50px; padding-bottom:10px;}
+
+
+ .form-horizontal {
+       position:relative;
+       bottom:500px;
+       left:830px;
+      
+    }
+    .spinwheel {
+       position:relative;
+       bottom:150px;
+       left:100px;
+      
+    }
+      .analyze {
+       position:relative;
+       bottom:150px;
+       
+      
+    }
+
+     .userdata {
+	 max-width: 500px;
+       position:relative;
+      bottom: 820px;
+	  right: 100px;
+	  left: 10px;
+       color: white;
+
+      
+    }
+	
+	.graph {
+	   position:relative;
+	}
+
+  
+</style>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+  <head>
+
+    <title>MSS iThinK</title>
+    
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/plugin.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+   
+ </head>
+
+  <body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <header id="home" class="home-section">
+        
+        <div class="header-top-area">
+            <div class="container">
+                <div class="row">
+                
+                    <div class="col-sm-3">
+                        <div class="logo">
+                            <a href="">MSS iThinK</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-9">
+                        <div class="navigation-menu">
+                            <div class="navbar">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="active"><a class="smoth-scroll" href="http://localhost:5000/">Home <div class="ripple-wrapper"></div></a>
+                                        </li>    
+                                        <li class="active"><a class="smoth-scroll" href="http://localhost:5000/graph_query?input_file=data.csv">New Analysis<div class="ripple-wrapper"></div></a>
+                                        </li>                        
+                                        <li><a class="smoth-scroll" href="#testimonials">Help</a>
+                                        </li>                                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="home-section-background" data-stellar-background-ratio="0.6">
+            <div class="display-table">
+                <div class="display-table-cell">
+                    <div class="container">
+                        <div class="row"><br><br>
+                            <div class="col-md-12 text-center">
+                                <div class="header-text">
+                                    <p>Choose another field to perform further Analysis on the result obtained</p><br><br>
+<a class="smoth-scroll" href="static\temp_files\raw_data1.csv"><button class="btn-primary" style="float: right;" >Download Data</button></a> 	
+<a href="static\temp_files\temp_data1.csv"><button class="btn-primary" style="float: right;">Download Analysis</button></a>
+                            
+<a class="smoth-scroll" href="#graph"><button class="btn-primary" style="float: right;" >Show Graph</button></a> <br>
+
+                                    <div class="content" id="spinwheel" style="visibility: hidden;">
+
+    <div class="circle"></div>
+    <div class="circle1"></div>
+    </div>
+
+ <div class="analyze" id="analyze" style="visibility: hidden;"><p style="color:white; text-align: center; text-shadow: 0 0 30px #2187e7; font-size: 35px;  "><span class="loading"></span></p></div>
+ 
+ 
+ 
+    <form class="form-horizontal" id="form2" action="http://localhost:5000/graph_analysis2">
+
+		<div class="col-sm-4">
+		<select class="form-control" name="schema_attr2">
+		{% for i in range(schema1.__len__()) %}
+				<option value="_{{i+1}}" >{{schema1[i]}}</option>
+			{% endfor %}
+		</select>
+	<br>
+
+        <input type="text" name="user_attr2" class="form-control" id="typingtext" placeholder="Enter the field value (optional) " >
+     
+                                    
+                                   
+                                   
+<button class="button button-style" type="submit" onclick="animation2()">Analyze</button>
+                                    
+
+                                    </form> </div> </div>
+
+
+                                    </div>
+
+
+
+<div class="userdata" id="userdata"> 
+
+<table border="2" class="table table-condensed" >
+	{%for i in range(1,display1.__len__()) %}
+		<tr >
+			<td >{{display1[i]}}</td>
+			<td>{{display_count[i]}}</td>
+		</tr>	
+		
+	
+	{% endfor %}
+	
+	</table></div>
+
+
+
+
+
+
+
+
+
+    </header>
+    <!-- Home & Menu Section End-->
+    <section id="graph" class="testimonial-section section-space-padding">
+     <div id="graph"><embed type='image/svg+xml' id = 'graph' src={{graph_data|safe}} style='max-width: 850px'/></div>
+
+    </section>
+
+     <section id="testimonials" class="testimonial-section section-space-padding">
+
+
+	 <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="section-title">
+                        <h2>How to use.</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="testimonial-carousel-list margin-top-20">
+                
+                    <div class="testimonial-word text-center">
+                        <h2>Further Analysis</h2>
+                        <p>Now you have made analysis to the first field and you can combine this result to make
+                        further analysis by choosing a second field
+                        </p>
+                    </div>
+                    
+                    <div class="testimonial-word text-center">
+                        <h2>Graph Analysis</h2>
+                        <p>The field that you will be choosing here will be Y-Axis for your graph, if you enter the field value you will be getting the unique values to the graph of that field</p>
+                    </div>
+                    
+                    <div class="testimonial-word text-center">
+                        <h2>Download</h2>
+                        <p>You can download the analyzed data as CSV value for further usage and you can also view the graph by clicking on 'Show Grpah'</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+	
+	
+	</section>
+   
+
+    
+    <!-- All Javascript Plugins  -->
+   
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }} "></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plugin.js') }} "></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }} "></script>
+  
+  
+  </body>
+ </html>
